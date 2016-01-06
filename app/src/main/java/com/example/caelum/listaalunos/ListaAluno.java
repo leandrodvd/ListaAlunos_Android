@@ -1,5 +1,6 @@
 package com.example.caelum.listaalunos;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -48,7 +49,8 @@ public class ListaAluno extends ActionBarActivity {
         inserir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ListaAluno.this,"Botão Clicado",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(ListaAluno.this,FormularioActivity.class);
+                startActivity(intent);
             }
         });
 
