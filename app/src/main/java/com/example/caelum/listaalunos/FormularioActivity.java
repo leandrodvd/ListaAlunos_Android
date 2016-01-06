@@ -30,6 +30,7 @@ public class FormularioActivity extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_formulario, menu);
+
         return true;
     }
 
@@ -41,7 +42,8 @@ public class FormularioActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.menu_formulario_ok) {
+            Toast.makeText(FormularioActivity.this,"Menu Ok Clicado",Toast.LENGTH_LONG);
             return true;
         }
 
