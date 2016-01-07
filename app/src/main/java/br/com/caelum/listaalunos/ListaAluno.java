@@ -14,20 +14,24 @@ import android.widget.Toast;
 
 import com.example.caelum.listaalunos.R;
 
+import java.util.List;
+
+import br.com.caelum.listaalunos.dao.AlunoDAO;
+import br.com.caelum.listaalunos.modelo.Aluno;
+
 
 public class ListaAluno extends ActionBarActivity {
+    private List<Aluno> alunos;
+    private ListView lista;
+    private  ArrayAdapter<Aluno> adapter;
 
+    AlunoDAO dao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_aluno);
 
-        String[] alunos ={"Clarck Kent","Peter Parker","Bruce Wayne"};
-
-        ListView lista = (ListView) this.findViewById(R.id.lista);
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,alunos);
-        lista.setAdapter(adapter);
+        lista = (ListView) this.findViewById(R.id.lista);
 
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -39,7 +43,7 @@ public class ListaAluno extends ActionBarActivity {
         lista.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                String aluno = (String) parent.getItemAtPosition(position);
+                String aluno = ((Aluno) parent.getItemAtPosition(position)).toString();
 
                 Toast.makeText(ListaAluno.this,aluno,Toast.LENGTH_LONG).show();
 
@@ -57,7 +61,19 @@ public class ListaAluno extends ActionBarActivity {
         });
 
     }
+    @Override
+    public void onResume(){
+        super.onResume();
+        carregarLista();
+    }
 
+    private void carregarLista() {
+       dao = new AlunoDAO(this);
+       alunos = dao.getLista();
+       adapter = new ArrayAdapter<Aluno>(this,android.R.layout.simple_list_item_1,alunos);
+       lista.setAdapter(adapter);
+        dao.close();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
