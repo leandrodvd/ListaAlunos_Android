@@ -1,29 +1,25 @@
-package com.example.caelum.listaalunos;
+package br.com.caelum.listaalunos;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
+
+import com.example.caelum.listaalunos.R;
+
+import br.com.caelum.listaalunos.modelo.Aluno;
 
 
 public class FormularioActivity extends ActionBarActivity {
+
+    private FormularioHelper helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario);
-
-        Button salvar = (Button) findViewById(R.id.formulario_botao_salvar);
-        salvar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(FormularioActivity.this, "Aluno Salvo", Toast.LENGTH_LONG);
-                finish();
-            }
-        });
+        this.helper=new FormularioHelper(this);
     }
 
     @Override
@@ -43,9 +39,16 @@ public class FormularioActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.menu_formulario_ok) {
-            Toast.makeText(FormularioActivity.this,"Menu Ok Clicado",Toast.LENGTH_LONG);
+            Aluno aluno = helper.pegaAlunoDoFormulario();
+            Toast.makeText(FormularioActivity.this, "Aluno Salvo - nome:"+ aluno.getNome()
+                    +" tel:"+aluno.getTelefone()+" site:"+aluno.getSite()
+                    +" endereço:"+ aluno.getEndereco()+" nota:"+aluno.getNota(),
+                    Toast.LENGTH_LONG).show();
+            finish();
             return true;
         }
+
+
 
         return super.onOptionsItemSelected(item);
     }

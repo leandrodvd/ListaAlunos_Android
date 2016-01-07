@@ -1,4 +1,4 @@
-package com.example.caelum.listaalunos;
+package br.com.caelum.listaalunos;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -11,6 +11,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.example.caelum.listaalunos.R;
 
 
 public class ListaAluno extends ActionBarActivity {
