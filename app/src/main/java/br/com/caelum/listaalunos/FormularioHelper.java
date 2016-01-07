@@ -37,4 +37,8 @@ public class FormularioHelper {
         aluno.setNota(Double.valueOf(this.nota.getProgress()));
         return aluno;
     }
+
+    public boolean temNome() {
+        return ! this.nome.getText().toString().equals("");
+    }
 }

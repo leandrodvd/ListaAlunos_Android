@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.example.caelum.listaalunos.R;
 
+import br.com.caelum.listaalunos.dao.AlunoDAO;
 import br.com.caelum.listaalunos.modelo.Aluno;
 
 
@@ -39,17 +40,19 @@ public class FormularioActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.menu_formulario_ok) {
-            Aluno aluno = helper.pegaAlunoDoFormulario();
-            Toast.makeText(FormularioActivity.this, "Aluno Salvo - nome:"+ aluno.getNome()
-                    +" tel:"+aluno.getTelefone()+" site:"+aluno.getSite()
-                    +" endereço:"+ aluno.getEndereco()+" nota:"+aluno.getNota(),
-                    Toast.LENGTH_LONG).show();
-            finish();
+            if(helper.temNome()){
+                Aluno aluno = helper.pegaAlunoDoFormulario();
+                AlunoDAO dao = new AlunoDAO(this);
+                dao.insere(aluno);
+                Toast.makeText(this,"Aluno "+aluno.getNome()+ " salvo",Toast.LENGTH_LONG).show();
+                finish();
+            }
+            else{
+                Toast.makeText(this,"Preencha o nome!",Toast.LENGTH_LONG).show();
+            }
+
             return true;
         }
-
-
-
         return super.onOptionsItemSelected(item);
     }
 }
