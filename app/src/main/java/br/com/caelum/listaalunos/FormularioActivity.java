@@ -1,5 +1,6 @@
 package br.com.caelum.listaalunos;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,6 +15,7 @@ import br.com.caelum.listaalunos.modelo.Aluno;
 
 public class FormularioActivity extends ActionBarActivity {
 
+    public static final String ALUNO_SELECIONADO = "alunoSelecionado";
     private FormularioHelper helper;
 
     @Override
@@ -21,6 +23,12 @@ public class FormularioActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario);
         this.helper=new FormularioHelper(this);
+
+        Intent intent = this.getIntent();
+        Aluno aluno = (Aluno)intent.getSerializableExtra(this.ALUNO_SELECIONADO);
+        if(aluno!=null){
+            helper.insereDadosNoFormulario(aluno);
+        }
     }
 
     @Override
@@ -43,7 +51,13 @@ public class FormularioActivity extends ActionBarActivity {
             if(helper.temNome()){
                 Aluno aluno = helper.pegaAlunoDoFormulario();
                 AlunoDAO dao = new AlunoDAO(this);
-                dao.insere(aluno);
+                if(aluno.getId()==null){
+                    dao.insere(aluno);
+                }else{
+                    dao.alterar(aluno);
+                }
+                dao.close();
+
                 Toast.makeText(this,"Aluno "+aluno.getNome()+ " salvo",Toast.LENGTH_LONG).show();
                 finish();
             }

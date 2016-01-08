@@ -41,4 +41,13 @@ public class FormularioHelper {
     public boolean temNome() {
         return ! this.nome.getText().toString().equals("");
     }
+
+    public void insereDadosNoFormulario(Aluno aluno) {
+        this.aluno=aluno;
+        this.nome.setText(aluno.getNome());
+        this.endereco.setText(aluno.getEndereco());
+        this.site.setText(aluno.getSite());
+        this.telefone.setText(aluno.getTelefone());
+        this.nota.setProgress(aluno.getNota().intValue());
+    }
 }

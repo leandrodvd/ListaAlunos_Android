@@ -26,7 +26,7 @@ public class ListaAluno extends ActionBarActivity {
     private List<Aluno> alunos;
     private ListView lista;
     private  ArrayAdapter<Aluno> adapter;
-    
+
 
     AlunoDAO dao;
     @Override
@@ -39,7 +39,11 @@ public class ListaAluno extends ActionBarActivity {
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(ListaAluno.this,"Item.Clicado" + position,Toast.LENGTH_LONG).show();
+                Aluno alunoSelecionado = (Aluno) lista.getItemAtPosition(position);
+                Intent edicao = new Intent(ListaAluno.this,FormularioActivity.class);
+                edicao.putExtra(FormularioActivity.ALUNO_SELECIONADO,alunoSelecionado);
+                startActivity(edicao);
+
             }
         });
 
@@ -49,7 +53,6 @@ public class ListaAluno extends ActionBarActivity {
                 String aluno = ((Aluno) parent.getItemAtPosition(position)).toString();
 
                 Toast.makeText(ListaAluno.this,aluno,Toast.LENGTH_LONG).show();
-
                 return false; //true or false dependendo se quiser mostrar
             }
         });
