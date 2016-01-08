@@ -1,8 +1,10 @@
 package br.com.caelum.listaalunos;
 
 import android.content.Intent;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -47,7 +49,7 @@ public class ListaAluno extends ActionBarActivity {
 
                 Toast.makeText(ListaAluno.this,aluno,Toast.LENGTH_LONG).show();
 
-                return true; //true or false dependendo se quiser mostrar
+                return false; //true or false dependendo se quiser mostrar
             }
         });
 
@@ -59,6 +61,8 @@ public class ListaAluno extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+
+        registerForContextMenu(lista);
 
     }
     @Override
@@ -96,4 +100,32 @@ public class ListaAluno extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo menuInfo){
+
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+        final Aluno alunoSelecionado = (Aluno) lista.getItemAtPosition(info.position);
+
+        MenuItem  ligar = menu.add("Ligar");
+        MenuItem  enviarSMS = menu.add("Enviar SMS");
+        MenuItem  acharNoMapa = menu.add("Achar no Mapa");
+        MenuItem  navegar = menu.add("Navegar no Site");
+        MenuItem  deletar = menu.add("Deletar");
+
+
+        deletar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                AlunoDAO dao = new AlunoDAO(ListaAluno.this);
+                dao.deletar(alunoSelecionado);
+                dao.close();
+                carregarLista();
+                return false;
+
+            }
+        });
+    }
+
 }
