@@ -26,6 +26,7 @@ public class ListaAluno extends ActionBarActivity {
     private List<Aluno> alunos;
     private ListView lista;
     private  ArrayAdapter<Aluno> adapter;
+    
 
     AlunoDAO dao;
     @Override
