@@ -1,6 +1,7 @@
 package br.com.caelum.listaalunos;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.caelum.listaalunos.R;
 
+import java.net.URI;
 import java.util.List;
 
 import br.com.caelum.listaalunos.dao.AlunoDAO;
@@ -117,6 +119,26 @@ public class ListaAluno extends ActionBarActivity {
         MenuItem  navegar = menu.add("Navegar no Site");
         MenuItem  deletar = menu.add("Deletar");
 
+        //Action for Ligar
+        Intent intentLigar = new Intent(Intent.ACTION_CALL);
+        intentLigar.setData(Uri.parse("tel:" + alunoSelecionado.getTelefone()));
+        ligar.setIntent(intentLigar);
+
+        //Action for enviarSMS
+        Intent intentSMS = new Intent(Intent.ACTION_VIEW);
+        intentSMS.setData(Uri.parse("sms:" + alunoSelecionado.getTelefone()));
+        intentSMS.putExtra("sms_body","Ola "+alunoSelecionado.getNome());
+        enviarSMS.setIntent(intentSMS);
+
+        //Action for acharNoMapa
+        Intent intentMapa = new Intent(Intent.ACTION_VIEW);
+        intentMapa.setData(Uri.parse("geo:0,0?z=14&q="+Uri.encode(alunoSelecionado.getEndereco())));
+        acharNoMapa.setIntent(intentMapa);
+
+        //Action para navegar
+        Intent intentNavegar = new Intent(Intent.ACTION_VIEW);
+        intentNavegar.setData(Uri.parse("http:"+ alunoSelecionado.getSite()));
+        navegar.setIntent(intentNavegar);
 
         deletar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override

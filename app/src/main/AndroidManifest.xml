@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.caelum.listaalunos" >
+    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
 
     <application
         android:allowBackup="true"
@@ -20,8 +21,9 @@
         <activity
             android:name="br.com.caelum.listaalunos.FormularioActivity"
             android:label="@string/title_activity_formulario" >
-
         </activity>
+
+
     </application>
 
 </manifest>
