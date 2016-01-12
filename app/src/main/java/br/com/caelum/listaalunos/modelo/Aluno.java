@@ -13,6 +13,16 @@ public class Aluno implements Serializable{
     private Double nota;
     private Long id;
 
+    public String getCaminhoFoto() {
+        return caminhoFoto;
+    }
+
+    public void setCaminhoFoto(String caminhoFoto) {
+        this.caminhoFoto = caminhoFoto;
+    }
+
+    private String caminhoFoto;
+
     @Override
     public String toString(){
         return this.getId()+ "-"+this.getNome();

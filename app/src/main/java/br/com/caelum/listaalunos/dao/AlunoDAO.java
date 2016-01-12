@@ -16,7 +16,7 @@ import br.com.caelum.listaalunos.modelo.Aluno;
  */
 public class AlunoDAO extends SQLiteOpenHelper{
 
-    private static final int VERSAO = 1;
+    private static final int VERSAO = 2;
     private static final String TABELA = "Alunos";
     private static final String DATABASE = " CadastroCaelum";
 
@@ -39,9 +39,8 @@ public class AlunoDAO extends SQLiteOpenHelper{
 
     public void onUpgrade(SQLiteDatabase database,
                            int versaoAntiga, int versaoNova){
-        String sql = " DROP TABLE IF EXISTS " + TABELA;
+        String sql = "ALTER TABLE " + TABELA+ " ADD COLUMN caminhoFoto TEXT";
         database.execSQL(sql);
-        onCreate(database);
     }
 
     public void insere(Aluno aluno){
@@ -51,6 +50,7 @@ public class AlunoDAO extends SQLiteOpenHelper{
         values.put("endereco",aluno.getEndereco());
         values.put("site",aluno.getSite());
         values.put("nota",aluno.getNota());
+        values.put("caminhoFoto",aluno.getCaminhoFoto());
 
         getWritableDatabase().insert(TABELA,null,values);
 
@@ -68,6 +68,7 @@ public class AlunoDAO extends SQLiteOpenHelper{
             aluno.setSite(c.getString(c.getColumnIndex("site")));
             aluno.setTelefone(c.getString(c.getColumnIndex("telefone")));
             aluno.setNota(c.getDouble(c.getColumnIndex("nota")));
+            aluno.setCaminhoFoto(c.getString(c.getColumnIndex("caminhoFoto")));
 
             alunos.add(aluno);
         }
@@ -87,6 +88,7 @@ public class AlunoDAO extends SQLiteOpenHelper{
         values.put("endereco",aluno.getEndereco());
         values.put("site",aluno.getSite());
         values.put("nota",aluno.getNota());
+        values.put("caminhoFoto",aluno.getCaminhoFoto());
         String[] args = {aluno.getId().toString()};
         getWritableDatabase().update(TABELA,values,"id=?",args);
     }
