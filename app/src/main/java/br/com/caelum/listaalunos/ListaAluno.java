@@ -20,6 +20,8 @@ import com.example.caelum.listaalunos.R;
 import java.net.URI;
 import java.util.List;
 
+import br.com.caelum.listaalunos.adapter.ListaAlunosAdapter;
+import br.com.caelum.listaalunos.converter.AlunoConverter;
 import br.com.caelum.listaalunos.dao.AlunoDAO;
 import br.com.caelum.listaalunos.modelo.Aluno;
 
@@ -27,7 +29,7 @@ import br.com.caelum.listaalunos.modelo.Aluno;
 public class ListaAluno extends ActionBarActivity {
     private List<Aluno> alunos;
     private ListView lista;
-    private  ArrayAdapter<Aluno> adapter;
+    private  ListaAlunosAdapter adapter;
 
 
     AlunoDAO dao;
@@ -80,7 +82,7 @@ public class ListaAluno extends ActionBarActivity {
     private void carregarLista() {
        dao = new AlunoDAO(this);
        alunos = dao.getLista();
-       adapter = new ArrayAdapter<Aluno>(this,android.R.layout.simple_list_item_1,alunos);
+       adapter = new ListaAlunosAdapter(this,alunos);
        lista.setAdapter(adapter);
         dao.close();
     }
@@ -100,7 +102,14 @@ public class ListaAluno extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.menu_enviar_notas) {
+            AlunoDAO dao = new AlunoDAO(this);
+            List<Aluno> alunos = dao.getLista();
+            dao.close();
+
+            String json = new AlunoConverter().toJSON(alunos);
+
+            Toast.makeText(this,json,Toast.LENGTH_LONG).show();
             return true;
         }
 

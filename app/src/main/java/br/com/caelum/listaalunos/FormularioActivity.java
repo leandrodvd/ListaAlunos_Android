@@ -55,11 +55,14 @@ public class FormularioActivity extends ActionBarActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode==REQUEST_CODE_TIRA_FOTO) {
-            helper.carregaImagem(this.localArquivoFoto);
+            if(resultCode==RESULT_OK){
+                helper.carregaImagem(this.localArquivoFoto);
+            }
+            else{
+                this.localArquivoFoto=null;
+            }
         }
-        else{
-            this.localArquivoFoto=null;
-        }
+
     }
 
     @Override
