@@ -2,6 +2,7 @@ package br.com.caelum.listaalunos;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.StrictMode;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -24,6 +25,8 @@ import br.com.caelum.listaalunos.adapter.ListaAlunosAdapter;
 import br.com.caelum.listaalunos.converter.AlunoConverter;
 import br.com.caelum.listaalunos.dao.AlunoDAO;
 import br.com.caelum.listaalunos.modelo.Aluno;
+import br.com.caelum.listaalunos.support.WebClient;
+import br.com.caelum.listaalunos.task.EnviaAlunosTask;
 
 
 public class ListaAluno extends ActionBarActivity {
@@ -101,19 +104,20 @@ public class ListaAluno extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.menu_enviar_notas) {
-            AlunoDAO dao = new AlunoDAO(this);
-            List<Aluno> alunos = dao.getLista();
-            dao.close();
-
-            String json = new AlunoConverter().toJSON(alunos);
-
-            Toast.makeText(this,json,Toast.LENGTH_LONG).show();
-            return true;
+        switch (id){
+            case R.id.menu_enviar_notas:
+                new EnviaAlunosTask(this).execute();
+                return true;
+            case R.id.menu_receber_provas:
+                Intent provas = new Intent(this,ProvasActivity.class);
+                startActivity(provas);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
 
-        return super.onOptionsItemSelected(item);
+
+
     }
 
     @Override
