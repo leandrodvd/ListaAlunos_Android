@@ -33,14 +33,21 @@ public class AlunoDAO extends SQLiteOpenHelper{
                         + " telefone TEXT, "
                         + " endereco TEXT, "
                         + " site TEXT, "
-                        + " nota REAL); ";
+                        + " nota REAL,"
+                        + " caminhoFoto TEXT ); ";
         database.execSQL(ddl);
     }
 
     public void onUpgrade(SQLiteDatabase database,
                            int versaoAntiga, int versaoNova){
-        String sql = "ALTER TABLE " + TABELA+ " ADD COLUMN caminhoFoto TEXT";
-        database.execSQL(sql);
+        switch(versaoAntiga){
+            case 1:
+                String sql = "ALTER TABLE " + TABELA+ " ADD COLUMN caminhoFoto TEXT";
+                database.execSQL(sql);
+        }
+
+
+
     }
 
     public void insere(Aluno aluno){
