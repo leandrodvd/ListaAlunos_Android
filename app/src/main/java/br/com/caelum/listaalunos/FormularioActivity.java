@@ -11,7 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.caelum.listaalunos.R;
+import br.com.caelum.listaalunos.R;
+import com.google.android.gms.maps.SupportMapFragment;
 
 import java.io.File;
 
@@ -102,5 +103,12 @@ public class FormularioActivity extends ActionBarActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Created by android5519 on 15/01/16.
+     */
+    public static class MapaFragments extends SupportMapFragment {
+
     }
 }

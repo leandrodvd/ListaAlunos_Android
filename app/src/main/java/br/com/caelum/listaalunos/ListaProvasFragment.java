@@ -12,7 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.caelum.listaalunos.R;
+import br.com.caelum.listaalunos.R;
 
 import java.util.Arrays;
 import java.util.List;

@@ -7,7 +7,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 
-import com.example.caelum.listaalunos.R;
+import br.com.caelum.listaalunos.R;
 
 import br.com.caelum.listaalunos.modelo.Aluno;
 

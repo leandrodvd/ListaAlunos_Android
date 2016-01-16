@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.telephony.SmsMessage;
 import android.widget.Toast;
 
-import com.example.caelum.listaalunos.R;
+import br.com.caelum.listaalunos.R;
 
 import br.com.caelum.listaalunos.dao.AlunoDAO;
 

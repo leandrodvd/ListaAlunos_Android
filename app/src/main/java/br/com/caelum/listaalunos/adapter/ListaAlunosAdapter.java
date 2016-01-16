@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.caelum.listaalunos.R;
+import br.com.caelum.listaalunos.R;
 
 import java.util.List;
 

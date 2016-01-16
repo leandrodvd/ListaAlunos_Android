@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.caelum.listaalunos.R;
+import br.com.caelum.listaalunos.R;
 
 import java.net.URI;
 import java.util.List;
@@ -111,6 +111,10 @@ public class ListaAluno extends ActionBarActivity {
             case R.id.menu_receber_provas:
                 Intent provas = new Intent(this,ProvasActivity.class);
                 startActivity(provas);
+                return true;
+            case R.id.menu_mapa:
+                Intent mapa = new Intent(this,MostraAlunosActivity.class);
+                startActivity(mapa);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
